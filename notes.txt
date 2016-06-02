@@ -1,21 +1,30 @@
 ----------------------------------------------
-- Build classes to load assets.
-    - The best way to deal with graphics assets in a 2d game is to load them from a textureatlas.
-        Libgdx has a tool to build a texture atlas. Its called texture packer:
-        https://github.com/libgdx/libgdx/wiki/Texture-packer
-        It loads all of the image asset files, combines them all into a texture atlas image file,
-            creates a text file which defines how to parse the texture atlas to retrieve each
-            image.
+- Create the Assets class. It implements Disposable and AssetErrorListener.
 
-        The textureatlas can be created using gradle. In build.gradle...
-        1. add the classpath 'com.badlogicgames.gdx:gdx-tools:1.7.0' to buildscript dependencies.
-        2. import TexturePacker at top of build.gradle
-        3. define packTextures task in build.gradle. This will execute TexturePacker to create
-            the textureatlas.
-        4. declare the dependency of compileJava on the packTextures task defined above. now
-            textureatlas will always be created before code is compiled.
+   - It is a singleton so its constructor has been marked private. Its only public instance is
+        available from a static instance assetsInstance.
+   - Its init method initializes the asset manager from textureatlas.
+   - Has inner class GigaGalAssets which stores the assets for the Gigagal entity.
 
-        If you build project at this point the textureatlas files should be created.
+----------------------------------------------
+
+- The best way to deal with graphics assets in a 2d game is to load them from a textureatlas.
+    Libgdx has a tool to build a texture atlas. Its called texture packer:
+    https://github.com/libgdx/libgdx/wiki/Texture-packer
+    It loads all of the image asset files, combines them all into a texture atlas image file,
+        creates a text file which defines how to parse the texture atlas to retrieve each
+        image.
+
+    The textureatlas can be created using gradle. In build.gradle...
+    1. add the classpath 'com.badlogicgames.gdx:gdx-tools:1.7.0' to buildscript dependencies.
+    2. import TexturePacker at top of build.gradle
+    3. define packTextures task in build.gradle. This will execute TexturePacker to create
+        the textureatlas.
+    4. declare the dependency of compileJava on the packTextures task defined above. now
+        textureatlas will always be created before code is compiled.
+
+    If you build project at this point the textureatlas files should be created.
+
 ----------------------------------------------
 - Project layout
 
