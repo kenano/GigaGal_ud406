@@ -1,6 +1,7 @@
 package com.kenan.libgdxtutorial.gigagal.util;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * Created by KenanO on 6/1/16.
@@ -20,4 +21,10 @@ public class Constants {
 
     //path to file which defines the texture atlas.
     public static final String TEXTURE_ATLAS = "images/gigagal.pack.atlas";
+
+    //A Vector2 Constant for GigaGal's eye position within her sprites.
+    public static final Vector2 VECTOR_GIGAGAL_EYE_POSITION = new Vector2(16,24);
+
+    //A float constant for the height of GigaGal's eye above her feet.
+    public static final float FLOAT_GIGAGAL_FEET_TO_EYES_DIST = 16.0f;
 }

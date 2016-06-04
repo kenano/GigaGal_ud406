@@ -1,4 +1,34 @@
 ----------------------------------------------
+Pull drawing logic out of `GameplayScreen` and into `GigaGal`. Add basic implementation of `GigaGal`
+    and `Level` classes.
+
+    - the relationship between GigaGal's position and where we draw her sprite. needs to be defined.
+     GigaGal will be drawn using different sprites (for jumping, walking, standing, etc.), make sure
+     that it doesn't look like she's moving around when we switch sprites. Therefore, GigaGal's
+     `position` is a `Vector2` that defines NOT the location of her feet or her bottom left corner,
+     but rather  her eye level as a reference point.
+
+    - In constants define VECTOR_GIGAGAL_EYE_POSITION which is a vector where GGs eyes are within
+    the sprite.
+    - Also define FLOAT_GIGAGAL_FEET_TO_EYES_DIST which is  float representing the distance from
+    GGs eyes to feet.
+    - In GigaGal add member Vector2 for GGs position.
+        - In GGs constructor initialize GGs position. Use FLOAT_GIGAGAL_FEET_TO_EYES_DIST for this.
+        - Draw GigaGal's standing-right sprite at position - GIGAGAL_EYE_POSITION.
+        - Implement render(). Copy draw() from Gameplayscreen. each element should manage its
+            rendering. The SpriteBatch used to draw is passed from Gameplayscreen to GG.
+    - Add basic implementation for Level:
+        - add GigaGal member variable.
+        - Initialize GG in the constructor.
+        - Implement methods update, render.
+    - In GameplayScreen:
+        - define a GigaGal member.
+        - Initialize/create gigagal in the constructor.
+        - Implement render and update methods.
+            - In render Call update() on the Level. and level.render().
+            -
+
+----------------------------------------------
 - Implement the GameplayScreen class. Have it draw the Gigagal sprite.
 
     - Create memebers: a SpriteBatch, ExtendedViewport.

@@ -13,6 +13,7 @@ import com.kenan.libgdxtutorial.gigagal.util.Constants;
  */
 public class GameplayScreen  extends ScreenAdapter {
 
+    /** Used for logging. */
     public static final String TAG = GameplayScreen.class.getName();
 
     // SpriteBatch provides functionality to draw textures.
@@ -22,10 +23,17 @@ public class GameplayScreen  extends ScreenAdapter {
     // the rest is letterboxed.
     private ExtendViewport mExtendedViewport;
 
+    // The environment GigaGal is in.
+    private Level mLevel;
+
+
     @Override
     public void show() {
         // Initialize the Assets instance
         Assets.assetsInstance.init();
+
+        // Initialize/create the Level
+        mLevel = new Level();
 
         // Initalize the SpriteBatch.
         mSpriteBatch = new SpriteBatch();
@@ -42,6 +50,10 @@ public class GameplayScreen  extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+
+        // Call update() on the Level
+        mLevel.update(delta);
+
         //  Apply the viewport
         mExtendedViewport.apply();
 
@@ -58,24 +70,8 @@ public class GameplayScreen  extends ScreenAdapter {
         //Begin the SpriteBatch
         mSpriteBatch.begin();
 
-        //Draw the standing right AtlasRegion
-        mSpriteBatch.draw(
-                Assets.assetsInstance.gigaGalAssets.atlasRegionStandingRight.getTexture(),
-                0,
-                0,
-                0,
-                0,
-                Assets.assetsInstance.gigaGalAssets.atlasRegionStandingRight.getRegionWidth(),
-                Assets.assetsInstance.gigaGalAssets.atlasRegionStandingRight.getRegionHeight(),
-                1,
-                1,
-                0,
-                Assets.assetsInstance.gigaGalAssets.atlasRegionStandingRight.getRegionX(),
-                Assets.assetsInstance.gigaGalAssets.atlasRegionStandingRight.getRegionY(),
-                Assets.assetsInstance.gigaGalAssets.atlasRegionStandingRight.getRegionWidth(),
-                Assets.assetsInstance.gigaGalAssets.atlasRegionStandingRight.getRegionHeight(),
-                false,
-                false);
+        //  Render the Level
+        mLevel.render(mSpriteBatch);
 
         // End the SpriteBatch
         mSpriteBatch.end();
@@ -83,10 +79,10 @@ public class GameplayScreen  extends ScreenAdapter {
 
     @Override
     public void dispose() {
-        // TODO: Dispose of the Assets instance
+        // Dispose of the Assets instance
         Assets.assetsInstance.dispose();
 
-        // TODO: Dispose of the SpriteBatch
+        // Dispose of the SpriteBatch
         mSpriteBatch.dispose();
     }
 
