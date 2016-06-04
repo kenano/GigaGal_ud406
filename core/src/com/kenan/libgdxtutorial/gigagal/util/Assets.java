@@ -60,7 +60,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public class GigaGalAssets {
 
         //holds the standing-right sprite
-        private TextureAtlas.AtlasRegion mAtlasRegionStandingRight;
+        public TextureAtlas.AtlasRegion atlasRegionStandingRight;
 
         /**
          *
@@ -69,7 +69,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public GigaGalAssets(TextureAtlas atlas) {
 
             //initialize the standing right AtlasRegion
-            mAtlasRegionStandingRight = atlas.findRegion(Constants.SPRITE_STANDING_RIGHT_NAME);
+            atlasRegionStandingRight = atlas.findRegion(Constants.SPRITE_STANDING_RIGHT_NAME);
         }
     }
 

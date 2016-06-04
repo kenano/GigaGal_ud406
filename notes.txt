@@ -1,11 +1,30 @@
 ----------------------------------------------
-- Create the Assets class. It implements Disposable and AssetErrorListener.
+- Implement the GameplayScreen class. Have it draw the Gigagal sprite.
+
+    - Create memebers: a SpriteBatch, ExtendedViewport.
+    -  Initialize the Assets instance. It is a singleton and the class doesnt allow it to directly
+        be created. use init to get the one instance of the class.
+    -  Initialize the SpriteBatch. The no params constructor Constructs a new SpriteBatch with a size
+        of 1000, one buffer, and the default shader.
+    - Initialize the ExtendedViewport. Pass it the Worldsize constant.
+    - Update the viewport in resize.
+    - In render, apply the viewport.
+    - Set clear color to what is specified in constants. Clear the background.
+    - Set the SpriteBatch's projection matrix to the ExtendedViewports Camera.combined projection
+        matrix.
+    - Begin the Sprite batch, invoke its draw method to draw GigaGal on screen.
+    - Override dispose to dispose of SpriteBatch and Assets.
+
+    - Change GigaGalGame parent class to Game.
+    - In its create method set screen to GameplayScreen.
+----------------------------------------------
+- Create the Assets class. It manages all of the assets used.
+    It implements Disposable and AssetErrorListener.
 
    - It is a singleton so its constructor has been marked private. Its only public instance is
         available from a static instance assetsInstance.
    - Its init method initializes the asset manager from textureatlas.
    - Has inner class GigaGalAssets which stores the assets for the Gigagal entity.
-
 ----------------------------------------------
 
 - The best way to deal with graphics assets in a 2d game is to load them from a textureatlas.
