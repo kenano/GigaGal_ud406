@@ -1,4 +1,15 @@
 ----------------------------------------------
+move GigaGal left and right using the arrow keys.
+
+    - Define methods in GigaGal: moveLeft(float delta) and moveRight... They update GGa position
+        based on GGs speed from Constants and the change rate delta parameter.
+
+    - Use Gdx.input.isKeyPressed() to check if the left arrow key is pressed
+             If so, call moveLeft Do the same with the right ArrowKey.
+
+    - Add constant for gigagal speed.
+
+----------------------------------------------
 Pull drawing logic out of `GameplayScreen` and into `GigaGal`. Add basic implementation of `GigaGal`
     and `Level` classes.
 
