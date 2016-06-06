@@ -19,6 +19,9 @@ public class Constants {
     /** name of label from .atlas for sprite: player standing facing to the right. */
     public static final String SPRITE_STANDING_RIGHT_NAME = "standing-right";
 
+    /** the name of label from .atlas for sprite: ... left */
+    public static final String SPRITE_STANDING_LEFT_NAME = "standing-left";
+
     /** path to file which defines the texture atlas. */
     public static final String TEXTURE_ATLAS = "images/gigagal.pack.atlas";
 

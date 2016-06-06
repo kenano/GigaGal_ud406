@@ -1,4 +1,21 @@
 ----------------------------------------------
+GigaGal facing direction
+
+    Drawing the correct sprite for GigaGal at the correct time depends on the direction GG is moving
+    loading up the standing-left sprite in our `Assets` singleton, keeping track of what direction
+    GigaGal is facing, and draw the right texture in GigaGal's `render()` method.
+
+    - Add a constant for the name of the standing-left sprite.
+    - Define a private enum Facing to define the possible directions GG could be facing (LEFT,
+    RIGHT)
+    - In GigaGal class Add a  member variable mFacingDirection to store which direction GG is
+    facing. This is determined by the direction GG is moving (what direction the user is entering).
+    - Initialize the facing direction member.
+    - Update mFacingDirection moveRight/moveLeft.
+    - In the render method create a TextureRegion variable and initialize it to null.
+    - Assign a texture (image) to the variable created above based on the value of mFacingDirection.
+
+----------------------------------------------
 move GigaGal left and right using the arrow keys.
 
     - Define methods in GigaGal: moveLeft(float delta) and moveRight... They update GGa position

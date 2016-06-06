@@ -59,8 +59,12 @@ public class Assets implements Disposable, AssetErrorListener {
     /** This inner class stores the assets for the Gigagal entity.*/
     public class GigaGalAssets {
 
-        //holds the standing-right sprite
-        public TextureAtlas.AtlasRegion atlasRegionStandingRight;
+        /** AtlasRegion the standing-right sprite */
+        public final TextureAtlas.AtlasRegion atlasRegionStandingRight;
+
+        /** AtlasRegion for the standing-left sprite */
+        public final TextureAtlas.AtlasRegion atlasRegionStandingLeft;
+
 
         /**
          *
@@ -70,6 +74,9 @@ public class Assets implements Disposable, AssetErrorListener {
 
             //initialize the standing right AtlasRegion
             atlasRegionStandingRight = atlas.findRegion(Constants.SPRITE_STANDING_RIGHT_NAME);
+
+            // Find the standing-left AtlasRegion
+            atlasRegionStandingLeft = atlas.findRegion(Constants.SPRITE_STANDING_LEFT_NAME);
         }
     }
 
