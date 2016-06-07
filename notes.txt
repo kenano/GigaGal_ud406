@@ -1,4 +1,56 @@
 ----------------------------------------------
+Jumping
+
+    - GigaGal can be in one of three possible JumpStates. GROUNDED, FALLING, JUMPING.
+        - If she's GROUNDED, and the player hits the jump button, three things happen:
+            1. set GigaGals's JumpState to JUMPING.
+            2. set GigaGal's vertical speed to some pre-defined value.
+            3. save the time at which the jump starts.
+        - When GigaGal is in the JUMPING JumpState, every frame we check to see if the jump button
+            is still pressed.
+                - If not, we set JumpState to FALLING.
+                - If the jump button is still pressed, we then check how long it's been since the
+                    jump started.
+        - If it's been longer than some predetermined time, the jump is over, and it's also time to
+            set GigaGal's state to FALLING. Otherwise, we again set her vertical velocity to the
+                same predetermined jump speed.
+        - Finally, when GigaGal is falling, we simply apply gravitational acceleration, and ignore
+            the jump button.
+
+    - Create a member vars: Vector2 for GGs velocity: mVelocity, a JumpState (see below)
+        mJumpingState, and long mJumpStartTime.
+    - In GigaGal constructor initialize mVelocity and mJumpingState.  (probably to FALLING
+        tested this with setting to GROUNDED. This Also seemed to work so Im not sure why). Maybe
+        because GG might be initialized above thw ground. Update checks when to set 'GROUNDED'.
+    - In GigaGal.update:
+        - Accelerate GigaGal down. Multiple delta by the acceleration due to gravity and subtract it
+            from GG's vertical velocity.
+        - Apply GigaGal's velocity to her position. Vector2.mulAdd() is very convenient for this
+            operation. Its scales a vector (by delta) then adds it (to the position vector).
+        - Check GGs JumpState if she isn't JUMPING, make her now FALLING.
+        - Check if GigaGal has landed on the ground. Remember that position keeps track of GigaGal's
+            eye position, not her feet.If she has indeed landed, change her jumpState to GROUNDED,
+            set her vertical velocity to 0, and make sure her feet aren't sticking into the floor.
+        - Handle jump key. Add a switch statement. If the jump key is pressed and GG is GROUNDED,
+            then startJump(). If she's JUMPING, then continueJump(). If she's falling, then don't do
+            anything. If the jump key wasn't pressed, endJump().
+    - Create JumpState enum containing JUMPING, FALLING, and GROUNDED. This defines to possible
+        states GG can be in.
+    - Create method startJump: Set jumpState to JUMPING, Set the jump start time. Use
+        TimeUtils.nanoTime(). Call continueJump().
+    - Create method continueJump.:if GG is already jumping and user is still pressing the jump
+        button, she should continue to jump higher for some reasonable amount of time. (this
+        achieves variable jumping).
+        -  First, check if we're JUMPING, if not, just return.
+        - Find out how long we've been jumping. This will require a utility method
+        (MathUtils.nanoToSecto convert to seconds.
+        - If we have been jumping for less than the max jump duration, set GG's vertical to the
+           jump speed constant. Else, call endJump().
+    - Create method endJump: Check If JUMPING, if so, set jumpstate to FALLING.
+
+    - In Constants:
+        - Gigagals jump speed, jump duration max, acceleration due to gravity.
+----------------------------------------------
 GigaGal facing direction
 
     Drawing the correct sprite for GigaGal at the correct time depends on the direction GG is moving
@@ -62,8 +114,8 @@ Pull drawing logic out of `GameplayScreen` and into `GigaGal`. Add basic impleme
     - Create memebers: a SpriteBatch, ExtendedViewport.
     -  Initialize the Assets instance. It is a singleton and the class doesnt allow it to directly
         be created. use init to get the one instance of the class.
-    -  Initialize the SpriteBatch. The no params constructor Constructs a new SpriteBatch with a size
-        of 1000, one buffer, and the default shader.
+    -  Initialize the SpriteBatch. The no params constructor Constructs a new SpriteBatch with a
+        size of 1000, one buffer, and the default shader.
     - Initialize the ExtendedViewport. Pass it the Worldsize constant.
     - Update the viewport in resize.
     - In render, apply the viewport.
@@ -149,4 +201,3 @@ A chain of events that is kicked off every frame.
         order.
     - When `Level` returns from `render`, `GamePlayScreen` ends the `SpriteBatch`, and the `render`
         call returns.
-
