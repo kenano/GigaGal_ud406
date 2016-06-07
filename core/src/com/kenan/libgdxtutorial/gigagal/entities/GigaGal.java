@@ -116,12 +116,30 @@ public class GigaGal {
         // Set region to the correct sprite for the current facing direction
         TextureRegion current_texture_region = null;
 
-        if(mFacingDirection == Facing.RIGHT){
-            current_texture_region =
-                    Assets.assetsInstance.gigaGalAssets.atlasRegionStandingRight;
-        }else if(mFacingDirection == Facing.LEFT){
-            current_texture_region =
-                    Assets.assetsInstance.gigaGalAssets.atlasRegionStandingLeft;
+        //Select the correct region based on facing and jumpState
+        if(mJumpingState == JumpingState.GROUNDED){
+            if(mFacingDirection == Facing.RIGHT){
+                current_texture_region =
+                        Assets.assetsInstance.gigaGalAssets.atlasRegionStandingRight;
+            }else if(mFacingDirection == Facing.LEFT){
+                current_texture_region =
+                        Assets.assetsInstance.gigaGalAssets.atlasRegionStandingLeft;
+            }
+            else {
+                //implement error handling.
+            }
+
+        }else if(mJumpingState == JumpingState.JUMPING || mJumpingState == JumpingState.FALLING) {
+            if(mFacingDirection == Facing.RIGHT){
+                current_texture_region =
+                        Assets.assetsInstance.gigaGalAssets.atlasRegionJumpingRight;
+            }else if(mFacingDirection == Facing.LEFT){
+                current_texture_region =
+                        Assets.assetsInstance.gigaGalAssets.atlasRegionJumpingLeft;
+            }
+            else {
+                //implement error handling.
+            }
         }else {
             //implement error handling.
         }

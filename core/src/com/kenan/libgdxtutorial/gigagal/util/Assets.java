@@ -65,6 +65,12 @@ public class Assets implements Disposable, AssetErrorListener {
         /** AtlasRegion for the standing-left sprite */
         public final TextureAtlas.AtlasRegion atlasRegionStandingLeft;
 
+        // Add AtlasRegions for jumping-left and jumping-right
+        /** AtlasRegion for the jumping-right sprite */
+        public final TextureAtlas.AtlasRegion atlasRegionJumpingRight;
+
+        /** AtlasRegion for the jumping-left sprite */
+        public final TextureAtlas.AtlasRegion atlasRegionJumpingLeft;
 
         /**
          *
@@ -77,6 +83,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
             // Find the standing-left AtlasRegion
             atlasRegionStandingLeft = atlas.findRegion(Constants.SPRITE_STANDING_LEFT_NAME);
+
+            // initialize the jumping right/left AtlasRegion
+            atlasRegionJumpingRight = atlas.findRegion(Constants.SPRITE_JUMPING_RIGHT_NAME);
+            atlasRegionJumpingLeft = atlas.findRegion(Constants.SPRITE_JUMPING_LEFT_NAME);
         }
     }
 

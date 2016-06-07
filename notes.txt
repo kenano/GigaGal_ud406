@@ -1,4 +1,15 @@
 ----------------------------------------------
+Jumping Sprites
+- Display the correct image when GigaGal is jumping.
+
+    - In Constants: Add constants for the jumping-right and jumping-left sprites.
+    - In Assets: In inner class GigaGalAssets, add member AtlasRegion variables: for jumping-left
+        and jumping-right, atlasRegionJumpingRight/atlasRegionJumpingLeft.
+        - In the constructor initialize these members to the correct region from the atlas map.
+    In GigaGal: Select the correct region based on facing and jumpState. This can be done with
+        embedded if blocks.
+
+----------------------------------------------
 Jumping
 
     - GigaGal can be in one of three possible JumpStates. GROUNDED, FALLING, JUMPING.
