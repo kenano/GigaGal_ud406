@@ -28,6 +28,12 @@ public class Constants {
     /** name of label from .atlas for sprite: player jumping facing to the right. */
     public static final String SPRITE_JUMPING_LEFT_NAME = "jumping-left";
 
+    /** name of label from .atlas for sprite: player walking-2 to the right. */
+    public static final String SPRITE_WALK_RIGHT_NAME = "walk-2-right";
+
+    /** name of label from .atlas for sprite: player walking-2 to the left. */
+    public static final String SPRITE_WALK_LEFT_NAME = "walk-2-left";
+
     /** path to file which defines the texture atlas. */
     public static final String TEXTURE_ATLAS = "images/gigagal.pack.atlas";
 

@@ -30,6 +30,9 @@ public class GigaGal {
     // GGs JumpState
     private JumpingState mJumpingState;
 
+    // WalkState keep track if GG is walking/standing. Used for animation.
+    private WalkState mWalkState;
+
     // timestamp when jump was initiated.
     private long mJumpStartTime;
 
@@ -49,6 +52,9 @@ public class GigaGal {
 
         //Initialize JumpState.
         mJumpingState = JumpingState.FALLING;
+
+        // When game starts GG is standing.
+        mWalkState = WalkState.STANDING;
     }
 
     /**
@@ -102,6 +108,9 @@ public class GigaGal {
             moveLeft(delta);
         }else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             moveRight(delta);
+        }else{
+            // if LEFT/RIGHT haesnt been pressed GG is STANDING.
+            mWalkState = WalkState.STANDING;
         }
     }
 
@@ -116,8 +125,8 @@ public class GigaGal {
         // Set region to the correct sprite for the current facing direction
         TextureRegion current_texture_region = null;
 
-        //Select the correct region based on facing and jumpState
-        if(mJumpingState == JumpingState.GROUNDED){
+        // Select the correct sprite based on facing, jumpState, and walkState
+        if((mJumpingState == JumpingState.GROUNDED) && (mWalkState == WalkState.STANDING)){
             if(mFacingDirection == Facing.RIGHT){
                 current_texture_region =
                         Assets.assetsInstance.gigaGalAssets.atlasRegionStandingRight;
@@ -128,8 +137,19 @@ public class GigaGal {
             else {
                 //implement error handling.
             }
-
-        }else if(mJumpingState == JumpingState.JUMPING || mJumpingState == JumpingState.FALLING) {
+        }else if((mJumpingState == JumpingState.GROUNDED) && (mWalkState == WalkState.WALKING)){
+            if(mFacingDirection == Facing.RIGHT){
+                current_texture_region =
+                        Assets.assetsInstance.gigaGalAssets.atlasRegionWalkingRight;
+            }else if(mFacingDirection == Facing.LEFT){
+                current_texture_region =
+                        Assets.assetsInstance.gigaGalAssets.atlasRegionWalkingLeft;
+            }
+            else {
+                //implement error handling.
+            }
+        }
+        else if(mJumpingState == JumpingState.JUMPING || mJumpingState == JumpingState.FALLING) {
             if(mFacingDirection == Facing.RIGHT){
                 current_texture_region =
                         Assets.assetsInstance.gigaGalAssets.atlasRegionJumpingRight;
@@ -178,8 +198,18 @@ public class GigaGal {
         GROUNDED
     }
 
+    //STANDING and WALKING defines the WalkState. Used for animation.
+    private enum WalkState{
+        STANDING,
+        WALKING
+    }
+
+
     private void moveLeft(float delta) {
         //update GGs position based on GGs speed from Constants and the change rate delta parameter.
+
+        //GG is walking. Set the state.
+        mWalkState = WalkState.WALKING;
 
         // Update facing direction
         mFacingDirection = Facing.LEFT;
@@ -189,6 +219,9 @@ public class GigaGal {
 
     private void moveRight(float delta) {
         //update GGs position based on GGs speed from Constants and the change rate delta parameter.
+
+        //GG is walking. Set the state.
+        mWalkState = WalkState.WALKING;
 
         // Update facing direction
         mFacingDirection = Facing.RIGHT;
